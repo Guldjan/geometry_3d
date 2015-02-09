@@ -1,0 +1,2 @@
+#!/usr/bin/env ruby
+require 'geometry_3d'
