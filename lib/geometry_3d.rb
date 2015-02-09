@@ -1,0 +1,7 @@
+require_relative './geometry_3d/point.rb'
+require_relative './geometry_3d/vector'
+require_relative './geometry_3d/line'
+require_relative './geometry_3d/plane'
+require_relative './geometry_3d/triangle'
+require_relative './geometry_3d/circle'
+require_relative './geometry_3d/equation.rb'
