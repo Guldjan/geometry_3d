@@ -50,6 +50,19 @@ class Vector
     Vector.new(*to_a.zip(vector.to_a).map { |a, b| a + b } )
   end
 
+  # Finds the scalar product of two vector.
+  #
+  # Example:
+  #   >> Vector.new(1, 2, 3).scalar_product(Vector.new(-2, 1, 2))
+  #   => 6
+  #
+  # Arguments:
+  #   vector: (Vector)
+
+  def scalar_product(vector)
+    to_a.zip(vector.to_a).map { |a, b| a * b }.reduce(:+)
+  end
+
   # Finds a vector perpendicular to both vectors.
   #
   # Example:

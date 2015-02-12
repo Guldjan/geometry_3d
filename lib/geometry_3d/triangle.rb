@@ -110,6 +110,6 @@ class Triangle
   #   no
 
   def get_centroid
-    get_median_a.find_intersecting_point(get_median_b)
+    get_median_a.find_intersecting_point_with_line(get_median_b)
   end
 end

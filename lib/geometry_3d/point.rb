@@ -83,8 +83,8 @@ class Point
     @x == point.x and @y == point.y and @z == point.z
   end
 
-  def round
-    Point.new(*to_a.map{|x| x.round(4)})
+  def round(number)
+    Point.new(*to_a.map{|x| x.round(number)})
   end
 
 

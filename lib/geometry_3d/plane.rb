@@ -92,18 +92,57 @@ class Plane
     Vector.construct_with_plane(self)
   end
 
+  # Find intersecting line of two planes. If the two planes do not intersect, returns nil.
+  #
+  # Example:
+  #   >> Plane.new(2, -5, 3, -12).find_intersecting_line_of_planes(Plane.new(3, 4, -3, -6))
+  #   => Line.new(Point.new(0, -18, -26), Vector.new(3, 15, 23))
+  # Arguments:
+  #   plane: (Plane)
 
-
-  def ==(plane)
-    #a == plane.a and b == plane.b and c == plane.c and d == plane.d
-    to_a.zip(plane.to_a).map { |a, b| a == b}.reduce(:&)
+  def find_intersecting_line_of_planes(plane)
+    if (intersect? plane)
+      vector = find_normal_vector.cross_product(plane.find_normal_vector)
+      eq1 = LinearEquation.new(b, c, d)
+      eq2 = LinearEquation.new(plane.b, plane.c, plane.d)
+      array = eq1.solve_system(eq2)
+      point = Point.new(0, array[0], array[1])
+      Line.new(point, vector)
+    end
   end
 
+  # Check if two planes are parallel.
+  #
+  # Example:
+  #   >> Plane.new(1, 2, 3, 5).parallel?(Plane.new(2, 4, 6, -4))
+  #   => true
+  #
+  # Arguments:
+  #   plane: (Plane)
+
+  def parallel?(plane)
+    a * plane.b == b * plane.a and c * plane.b == b * plane.c
+  end
+
+  # Check if two planes intersect.
+  #
+  # Example:
+  #   >> Plane.new(1, 2, 3, 5).parallel?(Plane.new(2, -4, 6, -4))
+  #   => true
+  #
+  # Arguments:
+  #   plane: (Plane)
+
+  def intersect?(plane)
+    not parallel? plane
+  end
+
+  def ==(plane)
+    to_a.zip(plane.to_a).map { |a, b| a == b}.reduce(:&)
+  end
 
   private
   def self.find_d(array, point)
     - array.zip(point.to_a).map { |a, b| a * b }.reduce(:+)
   end
-
-
 end
