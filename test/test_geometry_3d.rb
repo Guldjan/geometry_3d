@@ -40,6 +40,11 @@ class VectorTest < Minitest::Unit::TestCase
     Vector.construct_with_plane(Plane.new(1, -3, 3.5, 4))
   end
 
+  def test_scalar_product
+    assert_equal 6,
+    Vector.new(1, 2, 3).scalar_product(Vector.new(-2, 1, 2))
+  end
+
   def test_cross_product
     assert_equal Vector.new(1, -8, 5),
     Vector.new(1, 2, 3).cross_product(Vector.new(-2, 1, 2))
@@ -57,15 +62,76 @@ class LineTest < Minitest::Unit::TestCase
     Line.construct_with_two_points(Point.new(1, 2, 3), Point.new(3, 2, 1))
   end
 
-  #def test_find_point
-  #  assert_equal Point.new(0, 8, 9),
-  #  Line.new(Point.new(2, 4, 1), Vector.new(-1, 2, 4)).find_point(2)
-  #end
-
-  def test_intersecting_point
-    assert_equal Point.new(-4, -4, 4),
-    Line.new(Point.new(1, -2, 3), Vector.new(5, 2, -1)).find_intersecting_point(Line.new(Point.new(-4, -4, 1), Vector.new(-1, 3, -1)))
+  def test_intersecting_point_with_line_yes
+    assert_equal Point.new(1, 1, -3),
+    Line.new(Point.new(4, 19, 12), Vector.new(1, 6, 5)).find_intersecting_point_with_line(Line.new(Point.new(-3, -15, -19), Vector.new(2, 8, 8)))
   end
+
+  def test_intersecting_point_with_line_no
+    assert_equal nil,
+    Line.new(Point.new(4, 19, 12), Vector.new(1, 6, 2)).find_intersecting_point_with_line(Line.new(Point.new(-3, -15, -19), Vector.new(2, 12, 4)))
+  end
+
+  def test_intersecting_point_with_plane_yes
+    assert_equal Point.new(7, -4, 3),
+    Line.new(Point.new(1, 0, 1), Vector.new(3, -2, 1)).find_intersecting_point_with_plane(Plane.new(1, 1, 1, -6))
+  end
+
+  def test_intersecting_point_with_plane_no
+    assert_equal nil,
+    Line.new(Point.new(1, 0, 1), Vector.new(3, -2, 1)).find_intersecting_point_with_plane(Plane.new(1, 1, -1, -6))
+  end
+
+  def test_parallel_yes
+    assert_equal true,
+     Line.new(Point.new(1, 0, 1), Vector.new(3, -2, 1)).parallel?(Line.new(Point.new(2, 0, 1), Vector.new(6, -4, 2)))
+   end
+
+   def test_parallel_no
+    assert_equal false,
+     Line.new(Point.new(1, 0, 1), Vector.new(1, -2, 1)).parallel?(Line.new(Point.new(2, 0, 1), Vector.new(6, -4, 2)))
+   end
+
+  def test_intersect_yes
+    assert_equal true,
+    Line.new(Point.new(4, 19, 12), Vector.new(1, 6, 5)).intersect?(Line.new(Point.new(-3, -15, -19), Vector.new(2, 8, 8)))
+  end
+
+  def test_intersect_no
+    assert_equal false,
+    Line.new(Point.new(4, 19, 12), Vector.new(1, 6, 2)).intersect?(Line.new(Point.new(-3, -15, -19), Vector.new(2, 12, 4)))
+  end
+
+  def test_skew_yes
+    assert_equal true,
+    Line.new(Point.new(4, -5, 1), Vector.new(2, 4, 3)).skew?(Line.new(Point.new(2, -1, 0), Vector.new(1, 3, 2)))
+  end
+
+  def test_skew_no
+    assert_equal false,
+    Line.new(Point.new(4, -5, 1), Vector.new(2, 4, 4)).skew?(Line.new(Point.new(2, -1, 0), Vector.new(1, 2, 2)))
+  end
+
+  def test_parallel_to_plane_yes
+    assert_equal true,
+    Line.new(Point.new(4, -5, 1), Vector.new(2, 4, 1)).parallel_to_plane?(Plane.new(2, -2, 4, 3))
+  end
+
+  def test_parallel_to_plane_no
+    assert_equal false,
+    Line.new(Point.new(4, -5, 1), Vector.new(2, 4, 3)).parallel_to_plane?(Plane.new(1, 1, 4, 3))
+  end
+
+  def test_intersect_plane_yes
+    assert_equal true,
+    Line.new(Point.new(4, -5, 1), Vector.new(2, 4, 3)).intersect_plane?(Plane.new(1, 9, 1, 3))
+  end
+
+  def test_intersect_plane_no
+    assert_equal false,
+    Line.new(Point.new(4, -5, 1), Vector.new(2, 4, 1)).intersect_plane?(Plane.new(2, -2, 4, 3))
+  end
+
 end
 
 class TestPlane < Minitest::Unit::TestCase
@@ -93,6 +159,37 @@ class TestPlane < Minitest::Unit::TestCase
     assert_equal Plane.new(2, -3, 4, -3),
     Plane.construct_with_plane_and_point(Plane.new(2, -3, 4, 5), Point.new(1, 1, 1))
   end
+
+  def test_intersecting_line_of_planes_yes
+    assert_equal Line.new(Point.new(0, -18, -26), Vector.new(3, 15, 23)),
+    Plane.new(2, -5, 3, -12).find_intersecting_line_of_planes(Plane.new(3, 4, -3, -6))
+  end
+
+  def test_intersecting_line_of_planes_no
+    assert_equal nil,
+    Plane.new(2, 1, 2, -12).find_intersecting_line_of_planes(Plane.new(-4, -2, -4, -6))
+  end
+
+  def test_parallel_yes
+    assert_equal true,
+    Plane.new(1, 2, 3, 5).parallel?(Plane.new(2, 4, 6, -4))
+  end
+
+  def test_parallel_no
+    assert_equal false,
+    Plane.new(1, 2, -3, 5).parallel?(Plane.new(2, 4, 6, -4))
+  end
+
+  def test_intersect_yes
+    assert_equal true,
+    Plane.new(1, 2, -3, 5).intersect?(Plane.new(2, 4, 6, -4))
+  end
+
+  def test_parallel_no
+    assert_equal false,
+    Plane.new(1, 2, 3, 5).intersect?(Plane.new(2, 4, 6, -4))
+  end
+
 
 end
 
@@ -146,7 +243,7 @@ class TestTriangle < Minitest::Unit::TestCase
 
   def test_get_centroid
     assert_equal Point.new(5.6667, 6.3333, 7),
-    Triangle.new(Point.new(1, 2, 3), Point.new(4, 6, 9), Point.new(12, 11, 9)).get_centroid.round
+    Triangle.new(Point.new(1, 2, 3), Point.new(4, 6, 9), Point.new(12, 11, 9)).get_centroid.round(4)
   end
 
 end
