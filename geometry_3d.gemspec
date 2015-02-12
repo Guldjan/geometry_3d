@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'geometry_3d'
-  s.version     = '0.0.0'
+  s.version     = '0.1.1'
   s.executables = 'geometry_3d'
   s.date        = '2015-01-26'
   s.summary     = "Geometry in 3D"
