@@ -28,8 +28,6 @@ class Plane
     construct_with_two_vectors_and_point(vector1, vector2, point1)
   end
 
-
-
   # Construct plane with normal vector and passing through a point.
   #
   # Example:
@@ -135,6 +133,10 @@ class Plane
 
   def intersect?(plane)
     not parallel? plane
+  end
+
+  def substitute(primitive)
+    to_a.take(3).zip(primitive.to_a).map { |a, b| a * b}.reduce(:+) + d
   end
 
   def ==(plane)

@@ -79,6 +79,19 @@ class Vector
     Vector.new(coordinate_x, coordinate_y, coordinate_z)
   end
 
+  # Finds the length of the vector.
+  #
+  # Example:
+  #   >> Vector.new(4, 0, 3).length
+  #   => 5
+  #
+  # Arguments:
+  #   vector: (Vector)
+
+  def length
+    to_a.map{ |a| a * a}.reduce(:+) ** 0.5
+  end
+
   def to_a()
     [x, y, z]
   end

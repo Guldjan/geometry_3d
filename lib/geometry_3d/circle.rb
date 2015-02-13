@@ -3,7 +3,7 @@ class Circle
   attr_accessor :radius
   attr_accessor :vector
 
-  def initialize(point, vector, radius)
+  def initialize(point = Point.new(0, 0, 0), vector = Vector.new(0, 0, 1), radius)
     @point = point
     @radius = radius
     @vector = vector
@@ -34,6 +34,5 @@ class Circle
   def perimeter
     2 * Math::PI * radius
   end
-
 end
 

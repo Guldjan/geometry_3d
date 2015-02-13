@@ -50,9 +50,24 @@ class Line
 
   def find_intersecting_point_with_plane(plane)
     if (intersect_plane? plane)
-      numer = (plane.to_a.take(3).zip(point.to_a).map {|a, b| a * b}.reduce(:+) + plane.d)
-      denom = plane.to_a.take(3).zip(vector.to_a).map {|a, b| a * b}.reduce(:+).to_f
-      find_point(- numer / denom)
+      find_point(- plane.substitute(point) / (plane.substitute(vector) - plane.d).to_f)
+    end
+  end
+
+  # Find the angle(degrees) between line and plane. If the line and the plane do not intersect nil is returned.
+  #
+  # Example:
+  #   >> Line.new(Point.new(1, 0, 1), Vector.new(2, 1, 2)).find_angle_with_plane(Plane.new(1, 1, 0, -6))
+  #   => 45
+  #
+  # Arguments:
+  #   plane: (Plane)
+
+  def find_angle_with_plane(plane)
+    if (intersect_plane? plane)
+      numer = (vector.scalar_product(plane.find_normal_vector)).abs
+      denom = (vector.length * plane.find_normal_vector.length)
+      Math.asin(numer / denom) * (180 / Math::PI)
     end
   end
 
@@ -79,14 +94,10 @@ class Line
   #   line: (Line)
 
   def intersect?(line)
-    if (parallel? line)
-      false
-    else
       eq1 = LinearEquation.new(vector.x, -line.vector.x, point.x - line.point.x)
       eq2 = LinearEquation.new(vector.y, -line.vector.y, point.y - line.point.y)
       eq3 = LinearEquation.new(vector.z, -line.vector.z, point.z - line.point.z)
-      (eq1.solve_system(eq2) == eq2.solve_system(eq3))
-    end
+      (eq1.solve_system(eq2) == eq2.solve_system(eq3)) and (not parallel? line)
   end
 
   # Check if two lines are skew.
@@ -127,8 +138,6 @@ class Line
   def intersect_plane?(plane)
     not parallel_to_plane? plane
   end
-
-
 
   def ==(line)
     point == line.point and vector == line.vector

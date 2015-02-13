@@ -32,7 +32,7 @@ class Point
   #   plane: (Plane)
 
   def is_on_plane?(plane)
-    (plane.a * x + plane.b * y + plane.c * z + plane.d) == 0
+    plane.substitute(self) == 0
   end
 
   # Check if a point is on a line
@@ -48,20 +48,45 @@ class Point
     to_a.zip(line.point.to_a, line.vector.to_a).map { |a, b, c| (a - b) / c }.uniq.length == 1
   end
 
-  # Find the distance between two points
+  # Finds the distance between two points.
   #
   # Example:
-  #   >> Point.new(-7, -4, 3).distance_to(Point.new(17, 6, 2.5))
+  #   >> Point.new(-7, -4, 3).distance_to_point(Point.new(17, 6, 2.5))
   #   => 26.004807247891687
   #
   # Arguments:
   #   point: (Point)
 
-  def distance_to(point)
+  def distance_to_point(point)
     to_a.zip(point.to_a).map{|a, b| (b - a) ** 2}.reduce(:+) ** 0.5
   end
 
-  # Find the midpoint between two points
+  # Finds the distance between point and line.
+  #
+  # Example:
+  #   >> Point.new(0, 2, 3).distance_to_line(Line.new(Point.new(3, 1, -1), Vector.new(2, 1, 2)))
+  #   => 5
+  # Arguments:
+  #   line: (Line)
+
+  def distance_to_line(line)
+    numer = Vector.construct_with_two_points(self, line.point).cross_product(line.vector)
+    numer.length / line.vector.length
+  end
+
+  # Finds the distance between point and plane.
+  #
+  # Example:
+  #   >> Point.new(4, -4, 3).distance_to_plane(Plane.new(2, -2, 5, 8))
+  #   => 6.789028582272215
+  # Arguments:
+  #   plane: (Plane)
+
+  def distance_to_plane(plane)
+    plane.substitute(self).abs / (plane.find_normal_vector.length)
+  end
+
+  # Finds the midpoint between two points.
   #
   # Example:
   #   >> Point.new(-7, -4, 3).get_midpoint(Point.new(17, 6, 2.5))
@@ -78,7 +103,6 @@ class Point
     [x, y, z]
   end
 
-
   def ==(point)
     @x == point.x and @y == point.y and @z == point.z
   end
@@ -86,7 +110,5 @@ class Point
   def round(number)
     Point.new(*to_a.map{|x| x.round(number)})
   end
-
-
 end
 
