@@ -75,6 +75,8 @@
     
     <li ><a href="#method-c-new">::new</a>
     
+    <li ><a href="#method-i-area">#area</a>
+    
     <li ><a href="#method-i-get_centroid">#get_centroid</a>
     
     <li ><a href="#method-i-get_line_ab">#get_line_ab</a>
@@ -83,13 +85,43 @@
     
     <li ><a href="#method-i-get_line_bc">#get_line_bc</a>
     
-    <li ><a href="#method-i-get_median_a">#get_median_a</a>
+    <li ><a href="#method-i-get_line_height_a">#get_line_height_a</a>
     
-    <li ><a href="#method-i-get_median_b">#get_median_b</a>
+    <li ><a href="#method-i-get_line_height_b">#get_line_height_b</a>
     
-    <li ><a href="#method-i-get_median_c">#get_median_c</a>
+    <li ><a href="#method-i-get_line_height_c">#get_line_height_c</a>
+    
+    <li ><a href="#method-i-get_line_median_a">#get_line_median_a</a>
+    
+    <li ><a href="#method-i-get_line_median_b">#get_line_median_b</a>
+    
+    <li ><a href="#method-i-get_line_median_c">#get_line_median_c</a>
     
     <li ><a href="#method-i-get_plane">#get_plane</a>
+    
+    <li ><a href="#method-i-length_ab">#length_ab</a>
+    
+    <li ><a href="#method-i-length_ac">#length_ac</a>
+    
+    <li ><a href="#method-i-length_bc">#length_bc</a>
+    
+    <li ><a href="#method-i-length_height_a">#length_height_a</a>
+    
+    <li ><a href="#method-i-length_height_b">#length_height_b</a>
+    
+    <li ><a href="#method-i-length_height_c">#length_height_c</a>
+    
+    <li ><a href="#method-i-length_median_a">#length_median_a</a>
+    
+    <li ><a href="#method-i-length_median_b">#length_median_b</a>
+    
+    <li ><a href="#method-i-length_median_c">#length_median_c</a>
+    
+    <li ><a href="#method-i-perimeter">#perimeter</a>
+    
+    <li ><a href="#method-i-radius_of_circumscribed_circle">#radius_of_circumscribed_circle</a>
+    
+    <li ><a href="#method-i-radius_of_inscribed_circle">#radius_of_inscribed_circle</a>
     
   </ul>
 </div>
@@ -215,6 +247,49 @@
        </header>
 
     
+      <div id="method-i-area" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">area</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Finds the area of the triangle.</p>
+
+<p>Example:</p>
+
+<pre class="ruby"><span class="ruby-operator">&gt;&gt;</span> <span class="ruby-constant">Triangle</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>, <span class="ruby-value">1</span>, <span class="ruby-value">1</span>), <span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">2</span>, <span class="ruby-value">2</span>, <span class="ruby-value">7</span>), <span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>, <span class="ruby-value">3</span>, <span class="ruby-value">1</span>)).<span class="ruby-identifier">area</span>
+=<span class="ruby-operator">&gt;</span> <span class="ruby-value">1.9735087641318605</span>
+</pre>
+
+<p>Arguments:</p>
+
+<pre>no</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="area-source">
+            <pre><span class="ruby-comment"># File lib/geometry_3d/triangle.rb, line 138</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">area</span>
+  (<span class="ruby-identifier">length_bc</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">length_height_a</span>) <span class="ruby-operator">/</span> <span class="ruby-value">2.0</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
       <div id="method-i-get_centroid" class="method-detail ">
         
         <div class="method-heading">
@@ -244,9 +319,9 @@
 
           
           <div class="method-source-code" id="get_centroid-source">
-            <pre><span class="ruby-comment"># File lib/geometry_3d/triangle.rb, line 112</span>
+            <pre><span class="ruby-comment"># File lib/geometry_3d/triangle.rb, line 332</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_centroid</span>
-  <span class="ruby-identifier">get_median_a</span>.<span class="ruby-identifier">find_intersecting_point</span>(<span class="ruby-identifier">get_median_b</span>)
+  <span class="ruby-identifier">get_line_median_a</span>.<span class="ruby-identifier">find_intersecting_point_with_line</span>(<span class="ruby-identifier">get_line_median_b</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -287,7 +362,7 @@
 
           
           <div class="method-source-code" id="get_line_ab-source">
-            <pre><span class="ruby-comment"># File lib/geometry_3d/triangle.rb, line 34</span>
+            <pre><span class="ruby-comment"># File lib/geometry_3d/triangle.rb, line 212</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_line_ab</span>
   <span class="ruby-constant">Line</span>.<span class="ruby-identifier">construct_with_two_points</span>(<span class="ruby-identifier">point_a</span>, <span class="ruby-identifier">point_b</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -330,7 +405,7 @@
 
           
           <div class="method-source-code" id="get_line_ac-source">
-            <pre><span class="ruby-comment"># File lib/geometry_3d/triangle.rb, line 60</span>
+            <pre><span class="ruby-comment"># File lib/geometry_3d/triangle.rb, line 238</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_line_ac</span>
   <span class="ruby-constant">Line</span>.<span class="ruby-identifier">construct_with_two_points</span>(<span class="ruby-identifier">point_a</span>, <span class="ruby-identifier">point_c</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -373,7 +448,7 @@
 
           
           <div class="method-source-code" id="get_line_bc-source">
-            <pre><span class="ruby-comment"># File lib/geometry_3d/triangle.rb, line 47</span>
+            <pre><span class="ruby-comment"># File lib/geometry_3d/triangle.rb, line 225</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_line_bc</span>
   <span class="ruby-constant">Line</span>.<span class="ruby-identifier">construct_with_two_points</span>(<span class="ruby-identifier">point_b</span>, <span class="ruby-identifier">point_c</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -387,10 +462,142 @@
       </div>
 
     
-      <div id="method-i-get_median_a" class="method-detail ">
+      <div id="method-i-get_line_height_a" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">get_median_a</span><span
+          <span class="method-name">get_line_height_a</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Find the line in which the height from the point A lies.</p>
+
+<p>Example:</p>
+
+<pre class="ruby"><span class="ruby-operator">&gt;&gt;</span> <span class="ruby-constant">Triangle</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>, <span class="ruby-value">2</span>, <span class="ruby-value">3</span>), <span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">4</span>, <span class="ruby-value">6</span>, <span class="ruby-value">9</span>), <span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">12</span>, <span class="ruby-value">11</span>, <span class="ruby-value">9</span>)).<span class="ruby-identifier">get_line_height_a</span>
+=<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Line</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>, <span class="ruby-value">2</span>, <span class="ruby-value">3</span>), <span class="ruby-constant">Vector</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">85</span>, <span class="ruby-value">-136</span>, <span class="ruby-value">-534</span>))
+</pre>
+
+<p>Arguments:</p>
+
+<pre>no</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="get_line_height_a-source">
+            <pre><span class="ruby-comment"># File lib/geometry_3d/triangle.rb, line 251</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_line_height_a</span>
+  <span class="ruby-identifier">l</span> = <span class="ruby-identifier">get_line_bc</span>
+  <span class="ruby-constant">Line</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">point_a</span>,  <span class="ruby-identifier">l</span>.<span class="ruby-identifier">vector</span>.<span class="ruby-identifier">cross_product</span>(<span class="ruby-identifier">get_plane</span>.<span class="ruby-identifier">find_normal_vector</span>))
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-get_line_height_b" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_line_height_b</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Find the line in which the height from the point B lies.</p>
+
+<p>Example:</p>
+
+<pre class="ruby"><span class="ruby-operator">&gt;&gt;</span> <span class="ruby-constant">Triangle</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>, <span class="ruby-value">2</span>, <span class="ruby-value">3</span>), <span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">4</span>, <span class="ruby-value">6</span>, <span class="ruby-value">9</span>), <span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">12</span>, <span class="ruby-value">11</span>, <span class="ruby-value">9</span>)).<span class="ruby-identifier">get_line_height_b</span>
+=<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Line</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">4</span>, <span class="ruby-value">6</span>, <span class="ruby-value">9</span>), <span class="ruby-constant">Vector</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">441</span>, <span class="ruby-value">-7</span>, <span class="ruby-value">-798</span>))
+</pre>
+
+<p>Arguments:</p>
+
+<pre>no</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="get_line_height_b-source">
+            <pre><span class="ruby-comment"># File lib/geometry_3d/triangle.rb, line 265</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_line_height_b</span>
+  <span class="ruby-identifier">l</span> = <span class="ruby-identifier">get_line_ac</span>
+  <span class="ruby-constant">Line</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">point_b</span>,  <span class="ruby-identifier">l</span>.<span class="ruby-identifier">vector</span>.<span class="ruby-identifier">cross_product</span>(<span class="ruby-identifier">get_plane</span>.<span class="ruby-identifier">find_normal_vector</span>))
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-get_line_height_c" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_line_height_c</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Find the line in which the height from the point C lies.</p>
+
+<p>Example:</p>
+
+<pre class="ruby"><span class="ruby-operator">&gt;&gt;</span> <span class="ruby-constant">Triangle</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>, <span class="ruby-value">2</span>, <span class="ruby-value">3</span>), <span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">4</span>, <span class="ruby-value">6</span>, <span class="ruby-value">9</span>), <span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">12</span>, <span class="ruby-value">11</span>, <span class="ruby-value">9</span>)).<span class="ruby-identifier">get_line_height_c</span>
+=<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">ine</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">12</span>, <span class="ruby-value">11</span>, <span class="ruby-value">9</span>), <span class="ruby-constant">Vector</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">356</span>, <span class="ruby-value">129</span>, <span class="ruby-value">-264</span>))
+</pre>
+
+<p>Arguments:</p>
+
+<pre>no</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="get_line_height_c-source">
+            <pre><span class="ruby-comment"># File lib/geometry_3d/triangle.rb, line 279</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_line_height_c</span>
+  <span class="ruby-identifier">l</span> = <span class="ruby-identifier">get_line_ab</span>
+  <span class="ruby-constant">Line</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">point_c</span>, <span class="ruby-identifier">l</span>.<span class="ruby-identifier">vector</span>.<span class="ruby-identifier">cross_product</span>(<span class="ruby-identifier">get_plane</span>.<span class="ruby-identifier">find_normal_vector</span>))
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-get_line_median_a" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_line_median_a</span><span
             class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -404,7 +611,7 @@
 
 <p>Example:</p>
 
-<pre class="ruby"><span class="ruby-operator">&gt;&gt;</span> <span class="ruby-constant">Triangle</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>, <span class="ruby-value">2</span>, <span class="ruby-value">3</span>), <span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">4</span>, <span class="ruby-value">6</span>, <span class="ruby-value">9</span>), <span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">12</span>, <span class="ruby-value">11</span>, <span class="ruby-value">9</span>)).<span class="ruby-identifier">get_median_a</span>
+<pre class="ruby"><span class="ruby-operator">&gt;&gt;</span> <span class="ruby-constant">Triangle</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>, <span class="ruby-value">2</span>, <span class="ruby-value">3</span>), <span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">4</span>, <span class="ruby-value">6</span>, <span class="ruby-value">9</span>), <span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">12</span>, <span class="ruby-value">11</span>, <span class="ruby-value">9</span>)).<span class="ruby-identifier">get_line_median_a</span>
 =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Line</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>, <span class="ruby-value">2</span>, <span class="ruby-value">3</span>), <span class="ruby-constant">Vector</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">7</span>, <span class="ruby-value">6.5</span>, <span class="ruby-value">6</span>))
 </pre>
 
@@ -415,9 +622,9 @@
           
 
           
-          <div class="method-source-code" id="get_median_a-source">
-            <pre><span class="ruby-comment"># File lib/geometry_3d/triangle.rb, line 73</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_median_a</span>
+          <div class="method-source-code" id="get_line_median_a-source">
+            <pre><span class="ruby-comment"># File lib/geometry_3d/triangle.rb, line 293</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_line_median_a</span>
   <span class="ruby-constant">Line</span>.<span class="ruby-identifier">construct_with_two_points</span>(<span class="ruby-identifier">point_a</span>, <span class="ruby-identifier">point_b</span>.<span class="ruby-identifier">get_midpoint</span>(<span class="ruby-identifier">point_c</span>))
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -430,10 +637,10 @@
       </div>
 
     
-      <div id="method-i-get_median_b" class="method-detail ">
+      <div id="method-i-get_line_median_b" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">get_median_b</span><span
+          <span class="method-name">get_line_median_b</span><span
             class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -443,27 +650,24 @@
 
         <div class="method-description">
           
-          <pre class="ruby"><span class="ruby-constant">Find</span> <span class="ruby-identifier">the</span> <span class="ruby-identifier">median</span> <span class="ruby-identifier">of</span> <span class="ruby-identifier">the</span> <span class="ruby-identifier">triangle</span> <span class="ruby-identifier">from</span> <span class="ruby-identifier">the</span> <span class="ruby-identifier">point</span> <span class="ruby-constant">B</span>.
+          <p>Find the median of the triangle from the point B.</p>
 
-<span class="ruby-constant">Example</span><span class="ruby-operator">:</span>
-  <span class="ruby-operator">&gt;&gt;</span> <span class="ruby-constant">Triangle</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>, <span class="ruby-value">2</span>, <span class="ruby-value">3</span>), <span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">4</span>, <span class="ruby-value">6</span>, <span class="ruby-value">9</span>), <span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">12</span>, <span class="ruby-value">11</span>, <span class="ruby-value">9</span>)).<span class="ruby-identifier">get_median_b</span>
-  =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Line</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">4</span>, <span class="ruby-value">6</span>, <span class="ruby-value">9</span>), <span class="ruby-constant">Vector</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">2.5</span>, <span class="ruby-value">0.5</span>, <span class="ruby-value">-3</span>))
+<p>Example:</p>
 
-<span class="ruby-constant">Arguments</span><span class="ruby-operator">:</span>
-  <span class="ruby-identifier">no</span>
+<pre class="ruby"><span class="ruby-operator">&gt;&gt;</span> <span class="ruby-constant">Triangle</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>, <span class="ruby-value">2</span>, <span class="ruby-value">3</span>), <span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">4</span>, <span class="ruby-value">6</span>, <span class="ruby-value">9</span>), <span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">12</span>, <span class="ruby-value">11</span>, <span class="ruby-value">9</span>)).<span class="ruby-identifier">get_line_median_b</span>
+=<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Line</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">4</span>, <span class="ruby-value">6</span>, <span class="ruby-value">9</span>), <span class="ruby-constant">Vector</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">2.5</span>, <span class="ruby-value">0.5</span>, <span class="ruby-value">-3</span>))
 </pre>
 
-<p><a href="Line.html#method-c-new">Line.new</a>(Point.new(4, 6, 9), <a
-href="Vector.html#method-c-new">Vector.new</a>(2, 0,
--3)).find_intersecting_point(Line.new(Point.new(12, 11, 9), <a
-href="Vector.html#method-c-new">Vector.new</a>(-10, -7, -3)))</p>
+<p>Arguments:</p>
+
+<pre>no</pre>
           
           
 
           
-          <div class="method-source-code" id="get_median_b-source">
-            <pre><span class="ruby-comment"># File lib/geometry_3d/triangle.rb, line 86</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_median_b</span>
+          <div class="method-source-code" id="get_line_median_b-source">
+            <pre><span class="ruby-comment"># File lib/geometry_3d/triangle.rb, line 306</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_line_median_b</span>
   <span class="ruby-constant">Line</span>.<span class="ruby-identifier">construct_with_two_points</span>(<span class="ruby-identifier">point_b</span>, <span class="ruby-identifier">point_a</span>.<span class="ruby-identifier">get_midpoint</span>(<span class="ruby-identifier">point_c</span>))
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -476,10 +680,10 @@ href="Vector.html#method-c-new">Vector.new</a>(-10, -7, -3)))</p>
       </div>
 
     
-      <div id="method-i-get_median_c" class="method-detail ">
+      <div id="method-i-get_line_median_c" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">get_median_c</span><span
+          <span class="method-name">get_line_median_c</span><span
             class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -493,7 +697,7 @@ href="Vector.html#method-c-new">Vector.new</a>(-10, -7, -3)))</p>
 
 <p>Example:</p>
 
-<pre class="ruby"><span class="ruby-operator">&gt;&gt;</span> <span class="ruby-constant">Triangle</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>, <span class="ruby-value">2</span>, <span class="ruby-value">3</span>), <span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">4</span>, <span class="ruby-value">6</span>, <span class="ruby-value">9</span>), <span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">12</span>, <span class="ruby-value">11</span>, <span class="ruby-value">9</span>)).<span class="ruby-identifier">get_median_c</span>
+<pre class="ruby"><span class="ruby-operator">&gt;&gt;</span> <span class="ruby-constant">Triangle</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>, <span class="ruby-value">2</span>, <span class="ruby-value">3</span>), <span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">4</span>, <span class="ruby-value">6</span>, <span class="ruby-value">9</span>), <span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">12</span>, <span class="ruby-value">11</span>, <span class="ruby-value">9</span>)).<span class="ruby-identifier">get_line_median_c</span>
 =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Line</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">12</span>, <span class="ruby-value">11</span>, <span class="ruby-value">9</span>), <span class="ruby-constant">Vector</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">-9.5</span>, <span class="ruby-value">-7</span>, <span class="ruby-value">-3</span>))
 </pre>
 
@@ -504,9 +708,9 @@ href="Vector.html#method-c-new">Vector.new</a>(-10, -7, -3)))</p>
           
 
           
-          <div class="method-source-code" id="get_median_c-source">
-            <pre><span class="ruby-comment"># File lib/geometry_3d/triangle.rb, line 99</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_median_c</span>
+          <div class="method-source-code" id="get_line_median_c-source">
+            <pre><span class="ruby-comment"># File lib/geometry_3d/triangle.rb, line 319</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_line_median_c</span>
   <span class="ruby-constant">Line</span>.<span class="ruby-identifier">construct_with_two_points</span>(<span class="ruby-identifier">point_c</span>, <span class="ruby-identifier">point_a</span>.<span class="ruby-identifier">get_midpoint</span>(<span class="ruby-identifier">point_b</span>))
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -548,9 +752,525 @@ href="Vector.html#method-c-new">Vector.new</a>(-10, -7, -3)))</p>
 
           
           <div class="method-source-code" id="get_plane-source">
-            <pre><span class="ruby-comment"># File lib/geometry_3d/triangle.rb, line 21</span>
+            <pre><span class="ruby-comment"># File lib/geometry_3d/triangle.rb, line 190</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_plane</span>
   <span class="ruby-constant">Plane</span>.<span class="ruby-identifier">construct_with_three_points</span>(<span class="ruby-identifier">point_a</span>, <span class="ruby-identifier">point_b</span>, <span class="ruby-identifier">point_c</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-length_ab" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">length_ab</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Finds the length of the AB side of the triangle.</p>
+
+<p>Example:</p>
+
+<pre class="ruby"><span class="ruby-operator">&gt;&gt;</span> <span class="ruby-constant">Triangle</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>, <span class="ruby-value">1</span>, <span class="ruby-value">1</span>), <span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">2</span>, <span class="ruby-value">2</span>, <span class="ruby-value">7</span>), <span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>, <span class="ruby-value">3</span>, <span class="ruby-value">1</span>)).<span class="ruby-identifier">length_ab</span>
+=<span class="ruby-operator">&gt;</span> <span class="ruby-value">6.164414002968976</span>
+</pre>
+
+<p>Arguments:</p>
+
+<pre>no</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="length_ab-source">
+            <pre><span class="ruby-comment"># File lib/geometry_3d/triangle.rb, line 21</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">length_ab</span>
+  <span class="ruby-identifier">point_a</span>.<span class="ruby-identifier">distance_to_point</span>(<span class="ruby-identifier">point_b</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-length_ac" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">length_ac</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Finds the length of the AC side of the triangle.</p>
+
+<p>Example:</p>
+
+<pre class="ruby"><span class="ruby-operator">&gt;&gt;</span> <span class="ruby-constant">Triangle</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>, <span class="ruby-value">1</span>, <span class="ruby-value">1</span>), <span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">2</span>, <span class="ruby-value">2</span>, <span class="ruby-value">7</span>), <span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>, <span class="ruby-value">3</span>, <span class="ruby-value">1</span>)).<span class="ruby-identifier">length_ac</span>
+=<span class="ruby-operator">&gt;</span> <span class="ruby-value">2</span>
+</pre>
+
+<p>Arguments:</p>
+
+<pre>no</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="length_ac-source">
+            <pre><span class="ruby-comment"># File lib/geometry_3d/triangle.rb, line 47</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">length_ac</span>
+  <span class="ruby-identifier">point_a</span>.<span class="ruby-identifier">distance_to_point</span>(<span class="ruby-identifier">point_c</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-length_bc" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">length_bc</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Finds the length of the BC side of the triangle.</p>
+
+<p>Example:</p>
+
+<pre class="ruby"><span class="ruby-operator">&gt;&gt;</span> <span class="ruby-constant">Triangle</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>, <span class="ruby-value">1</span>, <span class="ruby-value">1</span>), <span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">2</span>, <span class="ruby-value">2</span>, <span class="ruby-value">7</span>), <span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>, <span class="ruby-value">3</span>, <span class="ruby-value">1</span>)).<span class="ruby-identifier">length_bc</span>
+=<span class="ruby-operator">&gt;</span> <span class="ruby-value">6.164414002968976</span>
+</pre>
+
+<p>Arguments:</p>
+
+<pre>no</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="length_bc-source">
+            <pre><span class="ruby-comment"># File lib/geometry_3d/triangle.rb, line 34</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">length_bc</span>
+  <span class="ruby-identifier">point_b</span>.<span class="ruby-identifier">distance_to_point</span>(<span class="ruby-identifier">point_c</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-length_height_a" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">length_height_a</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Finds the length of the height form point A of the triangle.</p>
+
+<p>Example:</p>
+
+<pre class="ruby"><span class="ruby-operator">&gt;&gt;</span> <span class="ruby-constant">Triangle</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>, <span class="ruby-value">1</span>, <span class="ruby-value">1</span>), <span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">2</span>, <span class="ruby-value">2</span>, <span class="ruby-value">7</span>), <span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>, <span class="ruby-value">3</span>, <span class="ruby-value">1</span>)).<span class="ruby-identifier">length_height_a</span>
+=<span class="ruby-operator">&gt;</span> <span class="ruby-value">6.082762530298219</span>
+</pre>
+
+<p>Arguments:</p>
+
+<pre>no</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="length_height_a-source">
+            <pre><span class="ruby-comment"># File lib/geometry_3d/triangle.rb, line 60</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">length_height_a</span>
+  <span class="ruby-identifier">point_a</span>.<span class="ruby-identifier">distance_to_line</span>(<span class="ruby-identifier">get_line_bc</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-length_height_b" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">length_height_b</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Finds the length of the height form point B of the triangle.</p>
+
+<p>Example:</p>
+
+<pre class="ruby"><span class="ruby-operator">&gt;&gt;</span> <span class="ruby-constant">Triangle</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>, <span class="ruby-value">1</span>, <span class="ruby-value">1</span>), <span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">2</span>, <span class="ruby-value">2</span>, <span class="ruby-value">7</span>), <span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>, <span class="ruby-value">3</span>, <span class="ruby-value">1</span>)).<span class="ruby-identifier">length_height_b</span>
+=<span class="ruby-operator">&gt;</span> <span class="ruby-value">1.9735087641318605</span>
+</pre>
+
+<p>Arguments:</p>
+
+<pre>no</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="length_height_b-source">
+            <pre><span class="ruby-comment"># File lib/geometry_3d/triangle.rb, line 73</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">length_height_b</span>
+  <span class="ruby-identifier">point_b</span>.<span class="ruby-identifier">distance_to_line</span>(<span class="ruby-identifier">get_line_ac</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-length_height_c" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">length_height_c</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Finds the length of the height form point C of the triangle.</p>
+
+<p>Example:</p>
+
+<pre class="ruby"><span class="ruby-operator">&gt;&gt;</span> <span class="ruby-constant">Triangle</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>, <span class="ruby-value">1</span>, <span class="ruby-value">1</span>), <span class="ruby-constant">Point</span>.<span class="ruby-operator">+</span><span class="ruby-identifier">new</span>(<span class="ruby-value">2</span>, <span class="ruby-value">2</span>, <span class="ruby-value">7</span>), <span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>, <span class="ruby-value">3</span>, <span class="ruby-value">1</span>)).<span class="ruby-identifier">length_height_c</span>
+=<span class="ruby-operator">&gt;</span> <span class="ruby-value">6.082762530298219</span>
+</pre>
+
+<p>Arguments:</p>
+
+<pre>no</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="length_height_c-source">
+            <pre><span class="ruby-comment"># File lib/geometry_3d/triangle.rb, line 86</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">length_height_c</span>
+  <span class="ruby-identifier">point_c</span>.<span class="ruby-identifier">distance_to_line</span>(<span class="ruby-identifier">get_line_ab</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-length_median_a" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">length_median_a</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Finds the length of the median form point A of the triangle.</p>
+
+<p>Example:</p>
+
+<pre class="ruby"><span class="ruby-operator">&gt;&gt;</span> <span class="ruby-constant">Triangle</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>, <span class="ruby-value">1</span>, <span class="ruby-value">1</span>), <span class="ruby-constant">Point</span>.<span class="ruby-operator">+</span><span class="ruby-identifier">new</span>(<span class="ruby-value">2</span>, <span class="ruby-value">2</span>, <span class="ruby-value">7</span>), <span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>, <span class="ruby-value">3</span>, <span class="ruby-value">1</span>)).<span class="ruby-identifier">length_median_a</span>
+=<span class="ruby-operator">&gt;</span> <span class="ruby-value">3.391164991562634</span>
+</pre>
+
+<p>Arguments:</p>
+
+<pre>no</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="length_median_a-source">
+            <pre><span class="ruby-comment"># File lib/geometry_3d/triangle.rb, line 99</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">length_median_a</span>
+  <span class="ruby-identifier">point_a</span>.<span class="ruby-identifier">distance_to_point</span>(<span class="ruby-identifier">point_b</span>.<span class="ruby-identifier">get_midpoint</span> <span class="ruby-identifier">point_c</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-length_median_b" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">length_median_b</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Finds the length of the median form point B of the triangle.</p>
+
+<p>Example:</p>
+
+<pre class="ruby"><span class="ruby-operator">&gt;&gt;</span> <span class="ruby-constant">Triangle</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>, <span class="ruby-value">1</span>, <span class="ruby-value">1</span>), <span class="ruby-constant">Point</span>.<span class="ruby-operator">+</span><span class="ruby-identifier">new</span>(<span class="ruby-value">2</span>, <span class="ruby-value">2</span>, <span class="ruby-value">7</span>), <span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>, <span class="ruby-value">3</span>, <span class="ruby-value">1</span>)).<span class="ruby-identifier">length_median_b</span>
+=<span class="ruby-operator">&gt;</span> <span class="ruby-value">6.08276253029818</span>
+</pre>
+
+<p>Arguments:</p>
+
+<pre>no</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="length_median_b-source">
+            <pre><span class="ruby-comment"># File lib/geometry_3d/triangle.rb, line 112</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">length_median_b</span>
+  <span class="ruby-identifier">point_b</span>.<span class="ruby-identifier">distance_to_point</span>(<span class="ruby-identifier">point_a</span>.<span class="ruby-identifier">get_midpoint</span> <span class="ruby-identifier">point_c</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-length_median_c" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">length_median_c</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Finds the length of the median form point C of the triangle.</p>
+
+<p>Example:</p>
+
+<pre class="ruby"><span class="ruby-operator">&gt;&gt;</span> <span class="ruby-constant">Triangle</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>, <span class="ruby-value">1</span>, <span class="ruby-value">1</span>), <span class="ruby-constant">Point</span>.<span class="ruby-operator">+</span><span class="ruby-identifier">new</span>(<span class="ruby-value">2</span>, <span class="ruby-value">2</span>, <span class="ruby-value">7</span>), <span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>, <span class="ruby-value">3</span>, <span class="ruby-value">1</span>)).<span class="ruby-identifier">length_median_c</span>
+=<span class="ruby-operator">&gt;</span> <span class="ruby-value">3.391164991562634</span>
+</pre>
+
+<p>Arguments:</p>
+
+<pre>no</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="length_median_c-source">
+            <pre><span class="ruby-comment"># File lib/geometry_3d/triangle.rb, line 125</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">length_median_c</span>
+  <span class="ruby-identifier">point_c</span>.<span class="ruby-identifier">distance_to_point</span>(<span class="ruby-identifier">point_a</span>.<span class="ruby-identifier">get_midpoint</span> <span class="ruby-identifier">point_b</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-perimeter" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">perimeter</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Finds the perimeter of the triangle.</p>
+
+<p>Example:</p>
+
+<pre class="ruby"><span class="ruby-operator">&gt;&gt;</span> <span class="ruby-constant">Triangle</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>, <span class="ruby-value">1</span>, <span class="ruby-value">1</span>), <span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">2</span>, <span class="ruby-value">2</span>, <span class="ruby-value">7</span>), <span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>, <span class="ruby-value">3</span>, <span class="ruby-value">1</span>)).<span class="ruby-identifier">perimeter</span>
+=<span class="ruby-operator">&gt;</span> <span class="ruby-value">14.32882800593795</span>
+</pre>
+
+<p>Arguments:</p>
+
+<pre>no</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="perimeter-source">
+            <pre><span class="ruby-comment"># File lib/geometry_3d/triangle.rb, line 151</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">perimeter</span>
+  <span class="ruby-identifier">length_ab</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">length_ac</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">length_bc</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-radius_of_circumscribed_circle" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">radius_of_circumscribed_circle</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Finds the radius of the circumscribed circle in triangle.</p>
+
+<p>Example:</p>
+
+<pre class="ruby"><span class="ruby-operator">&gt;&gt;</span> <span class="ruby-constant">Triangle</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>, <span class="ruby-value">1</span>, <span class="ruby-value">1</span>), <span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">2</span>, <span class="ruby-value">2</span>, <span class="ruby-value">7</span>), <span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>, <span class="ruby-value">3</span>, <span class="ruby-value">1</span>)).<span class="ruby-identifier">radius_of_circumscribed_circle</span>
+=<span class="ruby-operator">&gt;</span> <span class="ruby-value">3.123580758801788</span>
+</pre>
+
+<p>Arguments:</p>
+
+<pre>no</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="radius_of_circumscribed_circle-source">
+            <pre><span class="ruby-comment"># File lib/geometry_3d/triangle.rb, line 177</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">radius_of_circumscribed_circle</span>
+  (<span class="ruby-identifier">length_ab</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">length_bc</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">length_ac</span>) <span class="ruby-operator">/</span> (<span class="ruby-value">4</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">area</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-radius_of_inscribed_circle" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">radius_of_inscribed_circle</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Finds the radius of the inscribed circle in triangle.</p>
+
+<p>Example:</p>
+
+<pre class="ruby"><span class="ruby-operator">&gt;&gt;</span> <span class="ruby-constant">Triangle</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>, <span class="ruby-value">1</span>, <span class="ruby-value">1</span>), <span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">2</span>, <span class="ruby-value">2</span>, <span class="ruby-value">7</span>), <span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>, <span class="ruby-value">3</span>, <span class="ruby-value">1</span>)).<span class="ruby-identifier">radius_of_inscribed_circle</span>
+=<span class="ruby-operator">&gt;</span> <span class="ruby-value">0.8490244321137063</span>
+</pre>
+
+<p>Arguments:</p>
+
+<pre>no</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="radius_of_inscribed_circle-source">
+            <pre><span class="ruby-comment"># File lib/geometry_3d/triangle.rb, line 164</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">radius_of_inscribed_circle</span>
+  <span class="ruby-identifier">area</span> <span class="ruby-operator">/</span> (<span class="ruby-identifier">perimeter</span> <span class="ruby-operator">/</span> <span class="ruby-value">2</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           

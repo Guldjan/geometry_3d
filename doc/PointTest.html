@@ -73,13 +73,25 @@
 
   <ul class="link-list" role="directory">
     
-    <li ><a href="#method-i-test_distance_to">#test_distance_to</a>
+    <li ><a href="#method-i-test_distance_to_line">#test_distance_to_line</a>
+    
+    <li ><a href="#method-i-test_distance_to_line_zero">#test_distance_to_line_zero</a>
+    
+    <li ><a href="#method-i-test_distance_to_plane">#test_distance_to_plane</a>
+    
+    <li ><a href="#method-i-test_distance_to_plane_zero">#test_distance_to_plane_zero</a>
+    
+    <li ><a href="#method-i-test_distance_to_point">#test_distance_to_point</a>
     
     <li ><a href="#method-i-test_get_midpoint">#test_get_midpoint</a>
     
-    <li ><a href="#method-i-test_is_on_line">#test_is_on_line</a>
+    <li ><a href="#method-i-test_is_on_line_no">#test_is_on_line_no</a>
     
-    <li ><a href="#method-i-test_is_point_on_plane">#test_is_point_on_plane</a>
+    <li ><a href="#method-i-test_is_on_line_yes">#test_is_on_line_yes</a>
+    
+    <li ><a href="#method-i-test_is_point_on_plane_no">#test_is_point_on_plane_no</a>
+    
+    <li ><a href="#method-i-test_is_point_on_plane_yes">#test_is_point_on_plane_yes</a>
     
     <li ><a href="#method-i-test_translate">#test_translate</a>
     
@@ -117,10 +129,10 @@
        </header>
 
     
-      <div id="method-i-test_distance_to" class="method-detail ">
+      <div id="method-i-test_distance_to_line" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">test_distance_to</span><span
+          <span class="method-name">test_distance_to_line</span><span
             class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -135,11 +147,147 @@
           
 
           
-          <div class="method-source-code" id="test_distance_to-source">
-            <pre><span class="ruby-comment"># File test/test_geometry_3d.rb, line 20</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">test_distance_to</span>
+          <div class="method-source-code" id="test_distance_to_line-source">
+            <pre><span class="ruby-comment"># File test/test_geometry_3d.rb, line 35</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">test_distance_to_line</span>
+  <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">5</span>,
+  <span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>, <span class="ruby-value">2</span>, <span class="ruby-value">3</span>).<span class="ruby-identifier">distance_to_line</span>(<span class="ruby-constant">Line</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">3</span>, <span class="ruby-value">1</span>, <span class="ruby-value">-1</span>), <span class="ruby-constant">Vector</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">2</span>, <span class="ruby-value">1</span>, <span class="ruby-value">2</span>)))
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-test_distance_to_line_zero" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">test_distance_to_line_zero</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="test_distance_to_line_zero-source">
+            <pre><span class="ruby-comment"># File test/test_geometry_3d.rb, line 40</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">test_distance_to_line_zero</span>
+  <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">0</span>,
+  <span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>, <span class="ruby-value">1</span>, <span class="ruby-value">4</span>).<span class="ruby-identifier">distance_to_line</span>(<span class="ruby-constant">Line</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">2</span>, <span class="ruby-value">-1</span>, <span class="ruby-value">3</span>), <span class="ruby-constant">Vector</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">-1</span>, <span class="ruby-value">2</span>, <span class="ruby-value">1</span>)))
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-test_distance_to_plane" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">test_distance_to_plane</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="test_distance_to_plane-source">
+            <pre><span class="ruby-comment"># File test/test_geometry_3d.rb, line 45</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">test_distance_to_plane</span>
+  <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">6.8</span>,
+  <span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">4</span>, <span class="ruby-value">-4</span>, <span class="ruby-value">3</span>).<span class="ruby-identifier">distance_to_plane</span>(<span class="ruby-constant">Plane</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">2</span>, <span class="ruby-value">-2</span>, <span class="ruby-value">5</span>, <span class="ruby-value">8</span>)).<span class="ruby-identifier">round</span>(<span class="ruby-value">1</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-test_distance_to_plane_zero" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">test_distance_to_plane_zero</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="test_distance_to_plane_zero-source">
+            <pre><span class="ruby-comment"># File test/test_geometry_3d.rb, line 50</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">test_distance_to_plane_zero</span>
+  <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">0</span>,
+  <span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>, <span class="ruby-value">1</span>, <span class="ruby-value">1</span>).<span class="ruby-identifier">distance_to_plane</span>(<span class="ruby-constant">Plane</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>, <span class="ruby-value">2</span>, <span class="ruby-value">3</span>, <span class="ruby-value">-6</span>)).<span class="ruby-identifier">round</span>(<span class="ruby-value">1</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-test_distance_to_point" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">test_distance_to_point</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="test_distance_to_point-source">
+            <pre><span class="ruby-comment"># File test/test_geometry_3d.rb, line 30</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">test_distance_to_point</span>
   <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">26.0048</span>,
-  <span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">-7</span>, <span class="ruby-value">-4</span>, <span class="ruby-value">3</span>).<span class="ruby-identifier">distance_to</span>(<span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">17</span>, <span class="ruby-value">6</span>, <span class="ruby-value">2.5</span>)).<span class="ruby-identifier">round</span>(<span class="ruby-value">4</span>)
+  <span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">-7</span>, <span class="ruby-value">-4</span>, <span class="ruby-value">3</span>).<span class="ruby-identifier">distance_to_point</span>(<span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">17</span>, <span class="ruby-value">6</span>, <span class="ruby-value">2.5</span>)).<span class="ruby-identifier">round</span>(<span class="ruby-value">4</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -170,7 +318,7 @@
 
           
           <div class="method-source-code" id="test_get_midpoint-source">
-            <pre><span class="ruby-comment"># File test/test_geometry_3d.rb, line 25</span>
+            <pre><span class="ruby-comment"># File test/test_geometry_3d.rb, line 55</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">test_get_midpoint</span>
   <span class="ruby-identifier">assert_equal</span> <span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">5</span>, <span class="ruby-value">1</span>, <span class="ruby-value">2.75</span>),
   <span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">-7</span>, <span class="ruby-value">-4</span>, <span class="ruby-value">3</span>).<span class="ruby-identifier">get_midpoint</span>(<span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">17</span>, <span class="ruby-value">6</span>, <span class="ruby-value">2.5</span>))
@@ -185,10 +333,10 @@
       </div>
 
     
-      <div id="method-i-test_is_on_line" class="method-detail ">
+      <div id="method-i-test_is_on_line_no" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">test_is_on_line</span><span
+          <span class="method-name">test_is_on_line_no</span><span
             class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -203,9 +351,43 @@
           
 
           
-          <div class="method-source-code" id="test_is_on_line-source">
-            <pre><span class="ruby-comment"># File test/test_geometry_3d.rb, line 15</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">test_is_on_line</span>
+          <div class="method-source-code" id="test_is_on_line_no-source">
+            <pre><span class="ruby-comment"># File test/test_geometry_3d.rb, line 25</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">test_is_on_line_no</span>
+  <span class="ruby-identifier">assert_equal</span> <span class="ruby-keyword">false</span>,
+  <span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>, <span class="ruby-value">-3</span>, <span class="ruby-value">4</span>).<span class="ruby-identifier">is_on_line?</span>(<span class="ruby-constant">Line</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">2</span>, <span class="ruby-value">-1</span>, <span class="ruby-value">3</span>), <span class="ruby-constant">Vector</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">-1</span>, <span class="ruby-value">2</span>, <span class="ruby-value">1</span>)))
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-test_is_on_line_yes" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">test_is_on_line_yes</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="test_is_on_line_yes-source">
+            <pre><span class="ruby-comment"># File test/test_geometry_3d.rb, line 20</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">test_is_on_line_yes</span>
   <span class="ruby-identifier">assert_equal</span> <span class="ruby-keyword">true</span>,
   <span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>, <span class="ruby-value">1</span>, <span class="ruby-value">4</span>).<span class="ruby-identifier">is_on_line?</span>(<span class="ruby-constant">Line</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">2</span>, <span class="ruby-value">-1</span>, <span class="ruby-value">3</span>), <span class="ruby-constant">Vector</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">-1</span>, <span class="ruby-value">2</span>, <span class="ruby-value">1</span>)))
 <span class="ruby-keyword">end</span></pre>
@@ -219,10 +401,10 @@
       </div>
 
     
-      <div id="method-i-test_is_point_on_plane" class="method-detail ">
+      <div id="method-i-test_is_point_on_plane_no" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">test_is_point_on_plane</span><span
+          <span class="method-name">test_is_point_on_plane_no</span><span
             class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -237,9 +419,43 @@
           
 
           
-          <div class="method-source-code" id="test_is_point_on_plane-source">
+          <div class="method-source-code" id="test_is_point_on_plane_no-source">
+            <pre><span class="ruby-comment"># File test/test_geometry_3d.rb, line 15</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">test_is_point_on_plane_no</span>
+  <span class="ruby-identifier">assert_equal</span> <span class="ruby-keyword">false</span>,
+    <span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>, <span class="ruby-value">2</span>, <span class="ruby-value">1</span>).<span class="ruby-identifier">is_on_plane?</span>(<span class="ruby-constant">Plane</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>, <span class="ruby-value">2</span>, <span class="ruby-value">3</span>, <span class="ruby-value">-6</span>))
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-test_is_point_on_plane_yes" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">test_is_point_on_plane_yes</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="test_is_point_on_plane_yes-source">
             <pre><span class="ruby-comment"># File test/test_geometry_3d.rb, line 10</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">test_is_point_on_plane</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">test_is_point_on_plane_yes</span>
   <span class="ruby-identifier">assert_equal</span> <span class="ruby-keyword">true</span>,
     <span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>, <span class="ruby-value">1</span>, <span class="ruby-value">1</span>).<span class="ruby-identifier">is_on_plane?</span>(<span class="ruby-constant">Plane</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>, <span class="ruby-value">2</span>, <span class="ruby-value">3</span>, <span class="ruby-value">-6</span>))
 <span class="ruby-keyword">end</span></pre>

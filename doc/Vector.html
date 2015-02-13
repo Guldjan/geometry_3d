@@ -85,6 +85,10 @@
     
     <li ><a href="#method-i-cross_product">#cross_product</a>
     
+    <li ><a href="#method-i-length">#length</a>
+    
+    <li ><a href="#method-i-scalar_product">#scalar_product</a>
+    
     <li ><a href="#method-i-to_a">#to_a</a>
     
   </ul>
@@ -361,7 +365,7 @@ second_point: (Point)</pre>
 
           
           <div class="method-source-code" id="3D-3D-source">
-            <pre><span class="ruby-comment"># File lib/geometry_3d/vector.rb, line 73</span>
+            <pre><span class="ruby-comment"># File lib/geometry_3d/vector.rb, line 99</span>
 <span class="ruby-keyword">def</span> <span class="ruby-operator">==</span>(<span class="ruby-identifier">vector</span>)
   <span class="ruby-identifier">x</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">vector</span>.<span class="ruby-identifier">x</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">y</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">vector</span>.<span class="ruby-identifier">y</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">z</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">vector</span>.<span class="ruby-identifier">z</span>
 <span class="ruby-keyword">end</span></pre>
@@ -404,12 +408,98 @@ second_point: (Point)</pre>
 
           
           <div class="method-source-code" id="cross_product-source">
-            <pre><span class="ruby-comment"># File lib/geometry_3d/vector.rb, line 62</span>
+            <pre><span class="ruby-comment"># File lib/geometry_3d/vector.rb, line 75</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">cross_product</span>(<span class="ruby-identifier">vector</span>)
   <span class="ruby-identifier">coordinate_x</span> = <span class="ruby-identifier">y</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">vector</span>.<span class="ruby-identifier">z</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">z</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">vector</span>.<span class="ruby-identifier">y</span>
   <span class="ruby-identifier">coordinate_y</span> = <span class="ruby-identifier">z</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">vector</span>.<span class="ruby-identifier">x</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">x</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">vector</span>.<span class="ruby-identifier">z</span>
   <span class="ruby-identifier">coordinate_z</span> = <span class="ruby-identifier">x</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">vector</span>.<span class="ruby-identifier">y</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">y</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">vector</span>.<span class="ruby-identifier">x</span>
   <span class="ruby-constant">Vector</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">coordinate_x</span>, <span class="ruby-identifier">coordinate_y</span>, <span class="ruby-identifier">coordinate_z</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-length" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">length</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Finds the length of the vector.</p>
+
+<p>Example:</p>
+
+<pre class="ruby"><span class="ruby-operator">&gt;&gt;</span> <span class="ruby-constant">Vector</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">4</span>, <span class="ruby-value">0</span>, <span class="ruby-value">3</span>).<span class="ruby-identifier">length</span>
+=<span class="ruby-operator">&gt;</span> <span class="ruby-value">5</span>
+</pre>
+
+<p>Arguments:</p>
+
+<pre>vector: (Vector)</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="length-source">
+            <pre><span class="ruby-comment"># File lib/geometry_3d/vector.rb, line 91</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">length</span>
+  <span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">map</span>{ <span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">a</span>}.<span class="ruby-identifier">reduce</span>(<span class="ruby-value">:+</span>) <span class="ruby-operator">**</span> <span class="ruby-value">0.5</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-scalar_product" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">scalar_product</span><span
+            class="method-args">(vector)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Finds the scalar product of two vector.</p>
+
+<p>Example:</p>
+
+<pre class="ruby"><span class="ruby-operator">&gt;&gt;</span> <span class="ruby-constant">Vector</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>, <span class="ruby-value">2</span>, <span class="ruby-value">3</span>).<span class="ruby-identifier">scalar_product</span>(<span class="ruby-constant">Vector</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">-2</span>, <span class="ruby-value">1</span>, <span class="ruby-value">2</span>))
+=<span class="ruby-operator">&gt;</span> <span class="ruby-value">6</span>
+</pre>
+
+<p>Arguments:</p>
+
+<pre>vector: (Vector)</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="scalar_product-source">
+            <pre><span class="ruby-comment"># File lib/geometry_3d/vector.rb, line 62</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">scalar_product</span>(<span class="ruby-identifier">vector</span>)
+  <span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">zip</span>(<span class="ruby-identifier">vector</span>.<span class="ruby-identifier">to_a</span>).<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">a</span>, <span class="ruby-identifier">b</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">b</span> }.<span class="ruby-identifier">reduce</span>(<span class="ruby-value">:+</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -440,7 +530,7 @@ second_point: (Point)</pre>
 
           
           <div class="method-source-code" id="to_a-source">
-            <pre><span class="ruby-comment"># File lib/geometry_3d/vector.rb, line 69</span>
+            <pre><span class="ruby-comment"># File lib/geometry_3d/vector.rb, line 95</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_a</span>()
   [<span class="ruby-identifier">x</span>, <span class="ruby-identifier">y</span>, <span class="ruby-identifier">z</span>]
 <span class="ruby-keyword">end</span></pre>

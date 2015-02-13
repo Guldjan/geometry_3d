@@ -164,7 +164,7 @@
         
         <div class="method-heading">
           <span class="method-name">new</span><span
-            class="method-args">(point, vector, radius)</span>
+            class="method-args">(point = Point.new(0, 0, 0), vector = Vector.new(0, 0, 1), radius)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -180,7 +180,7 @@
           
           <div class="method-source-code" id="new-source">
             <pre><span class="ruby-comment"># File lib/geometry_3d/circle.rb, line 6</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">point</span>, <span class="ruby-identifier">vector</span>, <span class="ruby-identifier">radius</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">point</span> = <span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>, <span class="ruby-value">0</span>, <span class="ruby-value">0</span>), <span class="ruby-identifier">vector</span> = <span class="ruby-constant">Vector</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>, <span class="ruby-value">0</span>, <span class="ruby-value">1</span>), <span class="ruby-identifier">radius</span>)
   <span class="ruby-ivar">@point</span> = <span class="ruby-identifier">point</span>
   <span class="ruby-ivar">@radius</span> = <span class="ruby-identifier">radius</span>
   <span class="ruby-ivar">@vector</span> = <span class="ruby-identifier">vector</span>

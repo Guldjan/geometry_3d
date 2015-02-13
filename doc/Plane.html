@@ -85,7 +85,15 @@
     
     <li ><a href="#method-i-3D-3D">#==</a>
     
+    <li ><a href="#method-i-find_intersecting_line_of_planes">#find_intersecting_line_of_planes</a>
+    
     <li ><a href="#method-i-find_normal_vector">#find_normal_vector</a>
+    
+    <li ><a href="#method-i-intersect-3F">#intersect?</a>
+    
+    <li ><a href="#method-i-parallel-3F">#parallel?</a>
+    
+    <li ><a href="#method-i-substitute">#substitute</a>
     
     <li ><a href="#method-i-to_a">#to_a</a>
     
@@ -213,7 +221,7 @@ point: (Point)</pre>
 
           
           <div class="method-source-code" id="construct_with_normal_vector_and_point-source">
-            <pre><span class="ruby-comment"># File lib/geometry_3d/plane.rb, line 43</span>
+            <pre><span class="ruby-comment"># File lib/geometry_3d/plane.rb, line 41</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">construct_with_normal_vector_and_point</span>(<span class="ruby-identifier">vector</span>, <span class="ruby-identifier">point</span>)
   <span class="ruby-constant">Plane</span>.<span class="ruby-identifier">new</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">vector</span>.<span class="ruby-identifier">to_a</span>, <span class="ruby-identifier">find_d</span>(<span class="ruby-identifier">vector</span>.<span class="ruby-identifier">to_a</span>, <span class="ruby-identifier">point</span>))
 <span class="ruby-keyword">end</span></pre>
@@ -258,7 +266,7 @@ point: (Point)</pre>
 
           
           <div class="method-source-code" id="construct_with_plane_and_point-source">
-            <pre><span class="ruby-comment"># File lib/geometry_3d/plane.rb, line 74</span>
+            <pre><span class="ruby-comment"># File lib/geometry_3d/plane.rb, line 72</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">construct_with_plane_and_point</span>(<span class="ruby-identifier">plane</span>, <span class="ruby-identifier">point</span>)
   <span class="ruby-constant">Plane</span>.<span class="ruby-identifier">new</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">plane</span>.<span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">take</span>(<span class="ruby-value">3</span>), <span class="ruby-identifier">find_d</span>(<span class="ruby-identifier">plane</span>.<span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">take</span>(<span class="ruby-value">3</span>), <span class="ruby-identifier">point</span>))
 <span class="ruby-keyword">end</span></pre>
@@ -350,7 +358,7 @@ point: (Point)</pre>
 
           
           <div class="method-source-code" id="construct_with_two_vectors_and_point-source">
-            <pre><span class="ruby-comment"># File lib/geometry_3d/plane.rb, line 58</span>
+            <pre><span class="ruby-comment"># File lib/geometry_3d/plane.rb, line 56</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">construct_with_two_vectors_and_point</span>(<span class="ruby-identifier">vector1</span>, <span class="ruby-identifier">vector2</span>, <span class="ruby-identifier">point</span>)
   <span class="ruby-identifier">vector</span> = <span class="ruby-identifier">vector1</span>.<span class="ruby-identifier">cross_product</span>(<span class="ruby-identifier">vector2</span>)
   <span class="ruby-identifier">construct_with_normal_vector_and_point</span>(<span class="ruby-identifier">vector</span>, <span class="ruby-identifier">point</span>)
@@ -428,10 +436,60 @@ point: (Point)</pre>
 
           
           <div class="method-source-code" id="3D-3D-source">
-            <pre><span class="ruby-comment"># File lib/geometry_3d/plane.rb, line 97</span>
+            <pre><span class="ruby-comment"># File lib/geometry_3d/plane.rb, line 142</span>
 <span class="ruby-keyword">def</span> <span class="ruby-operator">==</span>(<span class="ruby-identifier">plane</span>)
-  <span class="ruby-comment">#a == plane.a and b == plane.b and c == plane.c and d == plane.d</span>
   <span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">zip</span>(<span class="ruby-identifier">plane</span>.<span class="ruby-identifier">to_a</span>).<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">a</span>, <span class="ruby-identifier">b</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">b</span>}.<span class="ruby-identifier">reduce</span>(<span class="ruby-value">:&amp;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-find_intersecting_line_of_planes" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">find_intersecting_line_of_planes</span><span
+            class="method-args">(plane)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Find intersecting line of two planes. If the two planes do not intersect,
+returns nil.</p>
+
+<p>Example:</p>
+
+<pre class="ruby"><span class="ruby-operator">&gt;&gt;</span> <span class="ruby-constant">Plane</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">2</span>, <span class="ruby-value">-5</span>, <span class="ruby-value">3</span>, <span class="ruby-value">-12</span>).<span class="ruby-identifier">find_intersecting_line_of_planes</span>(<span class="ruby-constant">Plane</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">3</span>, <span class="ruby-value">4</span>, <span class="ruby-value">-3</span>, <span class="ruby-value">-6</span>))
+=<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Line</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>, <span class="ruby-value">-18</span>, <span class="ruby-value">-26</span>), <span class="ruby-constant">Vector</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">3</span>, <span class="ruby-value">15</span>, <span class="ruby-value">23</span>))
+</pre>
+
+<p>Arguments:</p>
+
+<pre>plane: (Plane)</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="find_intersecting_line_of_planes-source">
+            <pre><span class="ruby-comment"># File lib/geometry_3d/plane.rb, line 101</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">find_intersecting_line_of_planes</span>(<span class="ruby-identifier">plane</span>)
+  <span class="ruby-keyword">if</span> (<span class="ruby-identifier">intersect?</span> <span class="ruby-identifier">plane</span>)
+    <span class="ruby-identifier">vector</span> = <span class="ruby-identifier">find_normal_vector</span>.<span class="ruby-identifier">cross_product</span>(<span class="ruby-identifier">plane</span>.<span class="ruby-identifier">find_normal_vector</span>)
+    <span class="ruby-identifier">eq1</span> = <span class="ruby-constant">LinearEquation</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">b</span>, <span class="ruby-identifier">c</span>, <span class="ruby-identifier">d</span>)
+    <span class="ruby-identifier">eq2</span> = <span class="ruby-constant">LinearEquation</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">plane</span>.<span class="ruby-identifier">b</span>, <span class="ruby-identifier">plane</span>.<span class="ruby-identifier">c</span>, <span class="ruby-identifier">plane</span>.<span class="ruby-identifier">d</span>)
+    <span class="ruby-identifier">array</span> = <span class="ruby-identifier">eq1</span>.<span class="ruby-identifier">solve_system</span>(<span class="ruby-identifier">eq2</span>)
+    <span class="ruby-identifier">point</span> = <span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>, <span class="ruby-identifier">array</span>[<span class="ruby-value">0</span>], <span class="ruby-identifier">array</span>[<span class="ruby-value">1</span>])
+    <span class="ruby-constant">Line</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">point</span>, <span class="ruby-identifier">vector</span>)
+  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -472,9 +530,128 @@ point: (Point)</pre>
 
           
           <div class="method-source-code" id="find_normal_vector-source">
-            <pre><span class="ruby-comment"># File lib/geometry_3d/plane.rb, line 91</span>
+            <pre><span class="ruby-comment"># File lib/geometry_3d/plane.rb, line 89</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">find_normal_vector</span>()
   <span class="ruby-constant">Vector</span>.<span class="ruby-identifier">construct_with_plane</span>(<span class="ruby-keyword">self</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-intersect-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">intersect?</span><span
+            class="method-args">(plane)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Check if two planes intersect.</p>
+
+<p>Example:</p>
+
+<pre class="ruby"><span class="ruby-operator">&gt;&gt;</span> <span class="ruby-constant">Plane</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>, <span class="ruby-value">2</span>, <span class="ruby-value">3</span>, <span class="ruby-value">5</span>).<span class="ruby-identifier">parallel?</span>(<span class="ruby-constant">Plane</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">2</span>, <span class="ruby-value">-4</span>, <span class="ruby-value">6</span>, <span class="ruby-value">-4</span>))
+=<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">true</span>
+</pre>
+
+<p>Arguments:</p>
+
+<pre>plane: (Plane)</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="intersect-3F-source">
+            <pre><span class="ruby-comment"># File lib/geometry_3d/plane.rb, line 134</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">intersect?</span>(<span class="ruby-identifier">plane</span>)
+  <span class="ruby-keyword">not</span> <span class="ruby-identifier">parallel?</span> <span class="ruby-identifier">plane</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-parallel-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">parallel?</span><span
+            class="method-args">(plane)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Check if two planes are parallel.</p>
+
+<p>Example:</p>
+
+<pre class="ruby"><span class="ruby-operator">&gt;&gt;</span> <span class="ruby-constant">Plane</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>, <span class="ruby-value">2</span>, <span class="ruby-value">3</span>, <span class="ruby-value">5</span>).<span class="ruby-identifier">parallel?</span>(<span class="ruby-constant">Plane</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">2</span>, <span class="ruby-value">4</span>, <span class="ruby-value">6</span>, <span class="ruby-value">-4</span>))
+=<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">true</span>
+</pre>
+
+<p>Arguments:</p>
+
+<pre>plane: (Plane)</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="parallel-3F-source">
+            <pre><span class="ruby-comment"># File lib/geometry_3d/plane.rb, line 121</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">parallel?</span>(<span class="ruby-identifier">plane</span>)
+  <span class="ruby-identifier">a</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">plane</span>.<span class="ruby-identifier">b</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">b</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">plane</span>.<span class="ruby-identifier">a</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">c</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">plane</span>.<span class="ruby-identifier">b</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">b</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">plane</span>.<span class="ruby-identifier">c</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-substitute" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">substitute</span><span
+            class="method-args">(primitive)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="substitute-source">
+            <pre><span class="ruby-comment"># File lib/geometry_3d/plane.rb, line 138</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">substitute</span>(<span class="ruby-identifier">primitive</span>)
+  <span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">take</span>(<span class="ruby-value">3</span>).<span class="ruby-identifier">zip</span>(<span class="ruby-identifier">primitive</span>.<span class="ruby-identifier">to_a</span>).<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">a</span>, <span class="ruby-identifier">b</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">b</span>}.<span class="ruby-identifier">reduce</span>(<span class="ruby-value">:+</span>) <span class="ruby-operator">+</span> <span class="ruby-identifier">d</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -505,7 +682,7 @@ point: (Point)</pre>
 
           
           <div class="method-source-code" id="to_a-source">
-            <pre><span class="ruby-comment"># File lib/geometry_3d/plane.rb, line 78</span>
+            <pre><span class="ruby-comment"># File lib/geometry_3d/plane.rb, line 76</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_a</span>
   [<span class="ruby-identifier">a</span>, <span class="ruby-identifier">b</span>, <span class="ruby-identifier">c</span>, <span class="ruby-identifier">d</span>]
 <span class="ruby-keyword">end</span></pre>

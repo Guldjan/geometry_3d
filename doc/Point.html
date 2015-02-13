@@ -77,7 +77,11 @@
     
     <li ><a href="#method-i-3D-3D">#==</a>
     
-    <li ><a href="#method-i-distance_to">#distance_to</a>
+    <li ><a href="#method-i-distance_to_line">#distance_to_line</a>
+    
+    <li ><a href="#method-i-distance_to_plane">#distance_to_plane</a>
+    
+    <li ><a href="#method-i-distance_to_point">#distance_to_point</a>
     
     <li ><a href="#method-i-get_midpoint">#get_midpoint</a>
     
@@ -234,7 +238,7 @@
 
           
           <div class="method-source-code" id="3D-3D-source">
-            <pre><span class="ruby-comment"># File lib/geometry_3d/point.rb, line 82</span>
+            <pre><span class="ruby-comment"># File lib/geometry_3d/point.rb, line 106</span>
 <span class="ruby-keyword">def</span> <span class="ruby-operator">==</span>(<span class="ruby-identifier">point</span>)
   <span class="ruby-ivar">@x</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">point</span>.<span class="ruby-identifier">x</span> <span class="ruby-keyword">and</span> <span class="ruby-ivar">@y</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">point</span>.<span class="ruby-identifier">y</span> <span class="ruby-keyword">and</span> <span class="ruby-ivar">@z</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">point</span>.<span class="ruby-identifier">z</span>
 <span class="ruby-keyword">end</span></pre>
@@ -248,10 +252,97 @@
       </div>
 
     
-      <div id="method-i-distance_to" class="method-detail ">
+      <div id="method-i-distance_to_line" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">distance_to</span><span
+          <span class="method-name">distance_to_line</span><span
+            class="method-args">(line)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Finds the distance between point and line.</p>
+
+<p>Example:</p>
+
+<pre class="ruby"><span class="ruby-operator">&gt;&gt;</span> <span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>, <span class="ruby-value">2</span>, <span class="ruby-value">3</span>).<span class="ruby-identifier">distance_to_line</span>(<span class="ruby-constant">Line</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">3</span>, <span class="ruby-value">1</span>, <span class="ruby-value">-1</span>), <span class="ruby-constant">Vector</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">2</span>, <span class="ruby-value">1</span>, <span class="ruby-value">2</span>)))
+=<span class="ruby-operator">&gt;</span> <span class="ruby-value">5</span>
+</pre>
+
+<p>Arguments:</p>
+
+<pre>line: (Line)</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="distance_to_line-source">
+            <pre><span class="ruby-comment"># File lib/geometry_3d/point.rb, line 72</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">distance_to_line</span>(<span class="ruby-identifier">line</span>)
+  <span class="ruby-identifier">numer</span> = <span class="ruby-constant">Vector</span>.<span class="ruby-identifier">construct_with_two_points</span>(<span class="ruby-keyword">self</span>, <span class="ruby-identifier">line</span>.<span class="ruby-identifier">point</span>).<span class="ruby-identifier">cross_product</span>(<span class="ruby-identifier">line</span>.<span class="ruby-identifier">vector</span>)
+  <span class="ruby-identifier">numer</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">/</span> <span class="ruby-identifier">line</span>.<span class="ruby-identifier">vector</span>.<span class="ruby-identifier">length</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-distance_to_plane" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">distance_to_plane</span><span
+            class="method-args">(plane)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Finds the distance between point and plane.</p>
+
+<p>Example:</p>
+
+<pre class="ruby"><span class="ruby-operator">&gt;&gt;</span> <span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">4</span>, <span class="ruby-value">-4</span>, <span class="ruby-value">3</span>).<span class="ruby-identifier">distance_to_plane</span>(<span class="ruby-constant">Plane</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">2</span>, <span class="ruby-value">-2</span>, <span class="ruby-value">5</span>, <span class="ruby-value">8</span>))
+=<span class="ruby-operator">&gt;</span> <span class="ruby-value">6.789028582272215</span>
+</pre>
+
+<p>Arguments:</p>
+
+<pre>plane: (Plane)</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="distance_to_plane-source">
+            <pre><span class="ruby-comment"># File lib/geometry_3d/point.rb, line 85</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">distance_to_plane</span>(<span class="ruby-identifier">plane</span>)
+  <span class="ruby-identifier">plane</span>.<span class="ruby-identifier">substitute</span>(<span class="ruby-keyword">self</span>).<span class="ruby-identifier">abs</span> <span class="ruby-operator">/</span> (<span class="ruby-identifier">plane</span>.<span class="ruby-identifier">find_normal_vector</span>.<span class="ruby-identifier">length</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-distance_to_point" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">distance_to_point</span><span
             class="method-args">(point)</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -261,11 +352,11 @@
 
         <div class="method-description">
           
-          <p>Find the distance between two points</p>
+          <p>Finds the distance between two points.</p>
 
 <p>Example:</p>
 
-<pre class="ruby"><span class="ruby-operator">&gt;&gt;</span> <span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">-7</span>, <span class="ruby-value">-4</span>, <span class="ruby-value">3</span>).<span class="ruby-identifier">distance_to</span>(<span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">17</span>, <span class="ruby-value">6</span>, <span class="ruby-value">2.5</span>))
+<pre class="ruby"><span class="ruby-operator">&gt;&gt;</span> <span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">-7</span>, <span class="ruby-value">-4</span>, <span class="ruby-value">3</span>).<span class="ruby-identifier">distance_to_point</span>(<span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">17</span>, <span class="ruby-value">6</span>, <span class="ruby-value">2.5</span>))
 =<span class="ruby-operator">&gt;</span> <span class="ruby-value">26.004807247891687</span>
 </pre>
 
@@ -276,9 +367,9 @@
           
 
           
-          <div class="method-source-code" id="distance_to-source">
+          <div class="method-source-code" id="distance_to_point-source">
             <pre><span class="ruby-comment"># File lib/geometry_3d/point.rb, line 60</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">distance_to</span>(<span class="ruby-identifier">point</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">distance_to_point</span>(<span class="ruby-identifier">point</span>)
   <span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">zip</span>(<span class="ruby-identifier">point</span>.<span class="ruby-identifier">to_a</span>).<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">a</span>, <span class="ruby-identifier">b</span><span class="ruby-operator">|</span> (<span class="ruby-identifier">b</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">a</span>) <span class="ruby-operator">**</span> <span class="ruby-value">2</span>}.<span class="ruby-identifier">reduce</span>(<span class="ruby-value">:+</span>) <span class="ruby-operator">**</span> <span class="ruby-value">0.5</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -304,7 +395,7 @@
 
         <div class="method-description">
           
-          <p>Find the midpoint between two points</p>
+          <p>Finds the midpoint between two points.</p>
 
 <p>Example:</p>
 
@@ -320,7 +411,7 @@
 
           
           <div class="method-source-code" id="get_midpoint-source">
-            <pre><span class="ruby-comment"># File lib/geometry_3d/point.rb, line 73</span>
+            <pre><span class="ruby-comment"># File lib/geometry_3d/point.rb, line 98</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_midpoint</span>(<span class="ruby-identifier">point</span>)
   <span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">zip</span>(<span class="ruby-identifier">point</span>.<span class="ruby-identifier">to_a</span>).<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">a</span>, <span class="ruby-identifier">b</span><span class="ruby-operator">|</span> (<span class="ruby-identifier">a</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">b</span>) <span class="ruby-operator">/</span> <span class="ruby-value">2.0</span> })
 <span class="ruby-keyword">end</span></pre>
@@ -408,7 +499,7 @@
           <div class="method-source-code" id="is_on_plane-3F-source">
             <pre><span class="ruby-comment"># File lib/geometry_3d/point.rb, line 34</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">is_on_plane?</span>(<span class="ruby-identifier">plane</span>)
-  (<span class="ruby-identifier">plane</span>.<span class="ruby-identifier">a</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">x</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">plane</span>.<span class="ruby-identifier">b</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">y</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">plane</span>.<span class="ruby-identifier">c</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">z</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">plane</span>.<span class="ruby-identifier">d</span>) <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+  <span class="ruby-identifier">plane</span>.<span class="ruby-identifier">substitute</span>(<span class="ruby-keyword">self</span>) <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -424,7 +515,7 @@
         
         <div class="method-heading">
           <span class="method-name">round</span><span
-            class="method-args">()</span>
+            class="method-args">(number)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -439,9 +530,9 @@
 
           
           <div class="method-source-code" id="round-source">
-            <pre><span class="ruby-comment"># File lib/geometry_3d/point.rb, line 86</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">round</span>
-  <span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">round</span>(<span class="ruby-value">4</span>)})
+            <pre><span class="ruby-comment"># File lib/geometry_3d/point.rb, line 110</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">round</span>(<span class="ruby-identifier">number</span>)
+  <span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">round</span>(<span class="ruby-identifier">number</span>)})
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -472,7 +563,7 @@
 
           
           <div class="method-source-code" id="to_a-source">
-            <pre><span class="ruby-comment"># File lib/geometry_3d/point.rb, line 77</span>
+            <pre><span class="ruby-comment"># File lib/geometry_3d/point.rb, line 102</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_a</span>
   [<span class="ruby-identifier">x</span>, <span class="ruby-identifier">y</span>, <span class="ruby-identifier">z</span>]
 <span class="ruby-keyword">end</span></pre>

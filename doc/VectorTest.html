@@ -79,6 +79,10 @@
     
     <li ><a href="#method-i-test_cross_product">#test_cross_product</a>
     
+    <li ><a href="#method-i-test_length">#test_length</a>
+    
+    <li ><a href="#method-i-test_scalar_product">#test_scalar_product</a>
+    
     <li ><a href="#method-i-test_sum_vector">#test_sum_vector</a>
     
   </ul>
@@ -134,7 +138,7 @@
 
           
           <div class="method-source-code" id="test_construct_with_plane-source">
-            <pre><span class="ruby-comment"># File test/test_geometry_3d.rb, line 38</span>
+            <pre><span class="ruby-comment"># File test/test_geometry_3d.rb, line 68</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">test_construct_with_plane</span>
   <span class="ruby-identifier">assert_equal</span> <span class="ruby-constant">Vector</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>, <span class="ruby-value">-3</span>, <span class="ruby-value">3.5</span>),
   <span class="ruby-constant">Vector</span>.<span class="ruby-identifier">construct_with_plane</span>(<span class="ruby-constant">Plane</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>, <span class="ruby-value">-3</span>, <span class="ruby-value">3.5</span>, <span class="ruby-value">4</span>))
@@ -168,7 +172,7 @@
 
           
           <div class="method-source-code" id="test_construct_with_two_points-source">
-            <pre><span class="ruby-comment"># File test/test_geometry_3d.rb, line 33</span>
+            <pre><span class="ruby-comment"># File test/test_geometry_3d.rb, line 63</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">test_construct_with_two_points</span>
   <span class="ruby-identifier">assert_equal</span> <span class="ruby-constant">Vector</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">2</span>, <span class="ruby-value">0</span>, <span class="ruby-value">-2</span>),
   <span class="ruby-constant">Vector</span>.<span class="ruby-identifier">construct_with_two_points</span>(<span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>, <span class="ruby-value">2</span>, <span class="ruby-value">3</span>), <span class="ruby-constant">Point</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">3</span>, <span class="ruby-value">2</span>, <span class="ruby-value">1</span>))
@@ -202,10 +206,78 @@
 
           
           <div class="method-source-code" id="test_cross_product-source">
-            <pre><span class="ruby-comment"># File test/test_geometry_3d.rb, line 43</span>
+            <pre><span class="ruby-comment"># File test/test_geometry_3d.rb, line 78</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">test_cross_product</span>
   <span class="ruby-identifier">assert_equal</span> <span class="ruby-constant">Vector</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>, <span class="ruby-value">-8</span>, <span class="ruby-value">5</span>),
   <span class="ruby-constant">Vector</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>, <span class="ruby-value">2</span>, <span class="ruby-value">3</span>).<span class="ruby-identifier">cross_product</span>(<span class="ruby-constant">Vector</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">-2</span>, <span class="ruby-value">1</span>, <span class="ruby-value">2</span>))
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-test_length" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">test_length</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="test_length-source">
+            <pre><span class="ruby-comment"># File test/test_geometry_3d.rb, line 83</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">test_length</span>
+  <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">5</span>,
+  <span class="ruby-constant">Vector</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">4</span>, <span class="ruby-value">0</span>, <span class="ruby-value">3</span>).<span class="ruby-identifier">length</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-test_scalar_product" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">test_scalar_product</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="test_scalar_product-source">
+            <pre><span class="ruby-comment"># File test/test_geometry_3d.rb, line 73</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">test_scalar_product</span>
+  <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">6</span>,
+  <span class="ruby-constant">Vector</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>, <span class="ruby-value">2</span>, <span class="ruby-value">3</span>).<span class="ruby-identifier">scalar_product</span>(<span class="ruby-constant">Vector</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">-2</span>, <span class="ruby-value">1</span>, <span class="ruby-value">2</span>))
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -236,7 +308,7 @@
 
           
           <div class="method-source-code" id="test_sum_vector-source">
-            <pre><span class="ruby-comment"># File test/test_geometry_3d.rb, line 48</span>
+            <pre><span class="ruby-comment"># File test/test_geometry_3d.rb, line 88</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">test_sum_vector</span>
   <span class="ruby-identifier">assert_equal</span> <span class="ruby-constant">Vector</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">-1</span>, <span class="ruby-value">3</span>, <span class="ruby-value">5</span>),
   <span class="ruby-constant">Vector</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>, <span class="ruby-value">2</span>, <span class="ruby-value">3</span>) <span class="ruby-operator">+</span> <span class="ruby-constant">Vector</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">-2</span>, <span class="ruby-value">1</span>, <span class="ruby-value">2</span>)
