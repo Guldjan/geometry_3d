@@ -11,3 +11,4 @@ gem install 'geometry_3d'
 - Plane
 - Circle
 - Triangle
+- Sphere
